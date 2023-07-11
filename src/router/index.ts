@@ -5,7 +5,7 @@ import AgeCalculator from '../components/AgeCalculator.vue'
 // import path from 'path'
 import productForm from '../components/productForm.vue'
 import ParentCom from '../views/ParentCom.vue'
-// import Display from '@/views/Display.vue'
+import Parent from '../views/Parent.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -43,6 +43,11 @@ const router = createRouter({
       name:'parentCom',
       component:ParentCom
 
+    },
+    {
+      path:'/parent',
+      name:'parent',
+      component:Parent
     }
   ]
 })

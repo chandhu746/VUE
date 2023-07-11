@@ -10,7 +10,6 @@
 </template>
 
 <script  lang="ts">
-// import filterMarks from '../src/filterMarks.js'
 import { defineComponent } from 'vue';
 import StudentTable from '../components/StudentTable.vue';
 import DataDisplay from '../components/Display.vue';
@@ -32,7 +31,7 @@ export default defineComponent({
   },
   data() {
     return {
-      submittedFormData: [] as FormDataInterface[]
+      submittedFormData: [] as FormDataInterface[] //initializes the submittedFormData property as an empty array of type FormDataInterface
     };
   },
   methods: {

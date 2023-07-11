@@ -1,6 +1,6 @@
 <template>
   <div class="data-display">
-    <h2>Form Data is Played Here</h2>
+    <h2>Form Data is DisPlayed Here</h2>
     <table v-if="formDataArray.length > 0" class="data-table">
       <thead>
         <tr>
@@ -12,6 +12,7 @@
           <th>Marks</th>
           <th>Hobbies</th>
           <th>Action</th>
+          <th>Grade</th>
         </tr>
       </thead>
       <tbody>
@@ -62,8 +63,8 @@
             </template>
             <template v-else>
               {{ formData.marks }}
-            </template>
-            <td :class="getGradeClass(formData.marks)">{{ getGradeText(formData.marks) }}</td>          </td>
+            </template> 
+           </td>
           <td>{{ formData.hobbies.join(', ') }}</td>
           <td>
             <template v-if="index === editIndex">
@@ -74,6 +75,7 @@
             </template>
             <button @click="deleteFormData(index)">Delete</button>
           </td>
+          <td :class="getGradeClass(formData.marks)">{{ getGradeText(formData.marks) }}</td> 
         </tr>
       </tbody>
     </table>
@@ -138,13 +140,20 @@ export default defineComponent({
       return `Your grade: ${grade}`;
     },
     updateFormData() {
-      const index = this.editIndex;
-      if (index !== -1) {
-        this.formDataArray.splice(index, 1, { ...this.formData });
-        this.editIndex = -1; // reset to -1 no edit in progress
-        this.formData = {} as FormDataInterface; // obj is empty
-      }
-    },
+  const index = this.editIndex;
+  if (index !== -1) {
+    const updatedFormData = {
+      ...this.formData,
+      marks: this.formData.marks,
+    };
+    this.formDataArray[index] = updatedFormData;
+    this.editIndex = -1; // Reset to -1, no edit in progress
+    this.formData = {} as FormDataInterface; // Reset formData object
+  }
+},
+
+
+
     deleteFormData(index: number) {
       this.formDataArray.splice(index, 1);
     },
@@ -154,7 +163,7 @@ export default defineComponent({
 
 <style scoped>
 .data-display {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   background-color: #080101;

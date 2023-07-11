@@ -23,6 +23,7 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="casio">Calculator</RouterLink>
         <RouterLink to="product">Catalog</RouterLink>
         <RouterLink to="parentCom">StudentsForm</RouterLink>
+        <RouterLink to="parent">Student</RouterLink>
 
         
       </nav>
