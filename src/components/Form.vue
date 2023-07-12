@@ -1,26 +1,58 @@
 <template>
     <form class="form" @submit.prevent="submitForm">
       <div class="form-group">
-        <label for="name">Name:</label>
+        <label for="name" >Name:</label>
         <input type="text" id="name" v-model="stu_name" required>
+      </div>
+      <div>
         <span class="error" v-if="!isNameValid">Name must contain only alphabets.</span>
       </div>
       <div class="form-group">
         <label for="roll">Roll:</label>
         <input type="text" id="roll" v-model="roll_no" required>
+      </div>
+      <div>
         <span class="error" v-if="!isRollValid">Roll Num must contain only numbers.</span>
       </div>
       <div class="form-group">
         <label for="courseName">Course Name:</label>
         <input type="text" id="courseName" v-model="course_name" required>
-        <span class="error" v-if="!isCourseNameValid">Course Name must contain only alphabets.</span>
       </div>
+      <div>
+         <span class="error" v-if="!isCourseNameValid">Course Name must contain only alphabets.</span>
+      </div>
+      <div>
       <button type="submit" class="btn">Submit</button>
+      <button type="button" class="btn" @click="resetForm">ResetForm</button>
+    </div>
     </form>
+    
   </template>
   
   <script>
+  import axios from "axios";
   export default {
+      props: {
+      formData: {
+       type: Object,
+     default:null
+
+    },
+    watch(){
+      formData:{
+        immediate : true,
+        handler(value){
+          if(value){
+            this.stu_name=value.stu_name;
+            this.roll_no= value.roll_no;
+            this.course_name= value.course_name;
+          }else{
+            this.resetForm();
+          }
+        },
+      },
+    },
+  },
     data() {
       return {
         stu_name: '',
@@ -42,6 +74,12 @@
           rollNo: this.roll_no,
           courseName: this.course_name,
         };
+
+        // if(this.editFormData){
+        //  await axios
+        //   .put(` http://127.0.0.1:3333/up/${roll_no}`)
+        //   .then((response)=)
+        // }
         this.$emit('form-submitted', formData);
         this.resetForm();
       },
@@ -52,6 +90,7 @@
         
         return this.isNameValid && this.isRollValid && this.isCourseNameValid;
       },
+      
       resetForm() {
         this.stu_name = '';
         this.roll_no = '';
@@ -60,6 +99,7 @@
         this.isRollValid = true;
         this.isCourseNameValid = true;
       },
+     
     },
   };
   </script>
